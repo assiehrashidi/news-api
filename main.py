@@ -2,11 +2,9 @@ import requests
 from bs4 import BeautifulSoup
 from fastapi import FastAPI
 from groq import Groq
+import os
 
 app = FastAPI()
-
-import os
-client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
 
 def get_news():
     url = "https://tejaratnews.com/category/اقتصادی"
@@ -22,6 +20,7 @@ def get_news():
     return news
 
 def summarize(news_list):
+    client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
     news_text = "\n".join([f"{i+1}. {n}" for i, n in enumerate(news_list)])
     response = client.chat.completions.create(
         model="llama-3.3-70b-versatile",
