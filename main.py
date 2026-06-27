@@ -7,18 +7,18 @@ import os
 app = FastAPI()
 
 def get_news():
-    url = "https://www.tasnimnews.com/fa/news/category/1"
+    url = "https://feeds.bbci.co.uk/persian/rss.xml"
     headers = {"User-Agent": "Mozilla/5.0"}
     response = requests.get(url, headers=headers)
-    soup = BeautifulSoup(response.text, "html.parser")
-    titles = soup.find_all("h3")
+    soup = BeautifulSoup(response.text, "xml")
+    titles = soup.find_all("title")
     news = []
-    for title in titles[:10]:
+    for title in titles[1:11]:
         text = title.text.strip()
         if text:
             news.append(text)
     return news
-
+    
 def summarize(news_list):
     client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
     news_text = "\n".join([f"{i+1}. {n}" for i, n in enumerate(news_list)])
