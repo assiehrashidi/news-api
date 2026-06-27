@@ -6,9 +6,7 @@ from groq import Groq
 app = FastAPI()
 
 import os
-api_key = os.environ.get("GROQ_API_KEY")
-
-client = Groq(api_key=api_key)
+client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
 
 def get_news():
     url = "https://tejaratnews.com/category/اقتصادی"
