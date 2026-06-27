@@ -7,7 +7,7 @@ import os
 app = FastAPI()
 
 def get_news():
-    url = "https://tejaratnews.com/category/اقتصادی"
+    url = "https://www.tasnimnews.com/fa/news/category/1"
     headers = {"User-Agent": "Mozilla/5.0"}
     response = requests.get(url, headers=headers)
     soup = BeautifulSoup(response.text, "html.parser")
