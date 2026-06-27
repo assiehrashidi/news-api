@@ -1,3 +1,6 @@
+import os
+print("GROQ KEY:", os.environ.get("GROQ_API_KEY", "NOT FOUND"))
+
 import requests
 from bs4 import BeautifulSoup
 from fastapi import FastAPI
